@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -48,39 +48,45 @@ namespace InteleSmsMessagingKit
             }
 
             IncomingSmsMessage retVal = new IncomingSmsMessage();
-            if (values["customer_id"] != null)
+            if (!string.IsNullOrEmpty(values["customer_id"]))
             {
                 retVal.CustomerId = Int32.Parse(values["customer_id"]);
                 ++dataCount;
             }
 
-            if (values["message_id"] != null)
+            if (!string.IsNullOrEmpty(values["message_id"]))
             {
                 retVal.MessageId = Int32.Parse(values["message_id"]);
                 ++dataCount;
             }
 
-            if (values["gateway"] != null)
+            if (!string.IsNullOrEmpty(values["gateway"]))
             {
                 retVal.DestinationNumber = values["gateway"].Trim();
                 ++dataCount;
             }
 
-            if (values["country_id"] != null)
+            if (!string.IsNullOrEmpty(values["country_id"]))
             {
                 retVal.CountryId = int.Parse(values["country_id"]);
                 ++dataCount;
             }
 
-            if (values["fromnumber"] != null)
+            if (!string.IsNullOrEmpty(values["fromnumber"]))
             {
                 retVal.OriginatorAddress = long.Parse(values["fromnumber"]);
                 ++dataCount;
             }
 
-            if (values["sms_keyword"] != null)
+            if (!string.IsNullOrEmpty(values["sms_keyword"]))
             {
                 retVal.Keyword = values["sms_keyword"];
+                ++dataCount;
+            }
+
+            if (!string.IsNullOrEmpty(values["DestinationAddress"]))
+            {
+                retVal.DestinationAddress = values["DestinationAddress"];
                 ++dataCount;
             }
 
@@ -90,11 +96,13 @@ namespace InteleSmsMessagingKit
                 ++dataCount;
             }
 
+            /*
+            //Validate inputs?
             if (dataCount < 6)
             {
                 throw new MissingFieldException("Invalid data!");
             }
-
+            */
             return retVal;
 
         }
@@ -113,6 +121,11 @@ namespace InteleSmsMessagingKit
         /// Country id from server
         /// </summary>
         public int? CountryId { get; set; }
+
+        /// <summary>
+        /// Destination address. E.g. +4799700999, 1933, 1960 etc.
+        /// </summary>
+        public string DestinationAddress { get; set; }
 
         /// <summary>
         /// Destination address for the message
