@@ -10,7 +10,7 @@ using System.Web;
 namespace InteleSmsMessagingKit
 {
     /// <summary>
-    /// Class that holds variables for an SMS MO message
+    /// Class that holds variables for a SMS MO message
     /// </summary>
 	public class IncomingSmsMessage
     {
