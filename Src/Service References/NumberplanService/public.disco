@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://services.intelesms.no/numberplan/public.asmx?wsdl" docRef="https://services.intelesms.no/numberplan/public.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://services.intelesms.no/numberplan/public.asmx" xmlns:q1="intele.services" binding="q1:NumberplanPublicSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://services.intelesms.no/numberplan/public.asmx" xmlns:q2="intele.services" binding="q2:NumberplanPublicSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

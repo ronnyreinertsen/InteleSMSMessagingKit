@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="intele.services" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="intele.services" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">International numberingplan</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="intele.services">
+      <s:element name="Query">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="msisdn" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryResult" type="tns:NumberInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="NumberInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="number_range" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="country_code" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="national_significant_number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="iso_3166_alpha_2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="iso_3166_alpha_3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="destination" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="number_type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="location" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="registrar" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="area_code_length" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="country_id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="min_number_length" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="max_number_length" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Authorizer" type="tns:Authorizer" />
+      <s:complexType name="Authorizer">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ApiCustomerId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ApiPassword" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="NumberInfo" nillable="true" type="tns:NumberInfo" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="QuerySoapIn">
+    <wsdl:part name="parameters" element="tns:Query" />
+  </wsdl:message>
+  <wsdl:message name="QuerySoapOut">
+    <wsdl:part name="parameters" element="tns:QueryResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryAuthorizer">
+    <wsdl:part name="Authorizer" element="tns:Authorizer" />
+  </wsdl:message>
+  <wsdl:message name="QueryHttpGetIn">
+    <wsdl:part name="msisdn" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryHttpGetOut">
+    <wsdl:part name="Body" element="tns:NumberInfo" />
+  </wsdl:message>
+  <wsdl:message name="QueryHttpPostIn">
+    <wsdl:part name="msisdn" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryHttpPostOut">
+    <wsdl:part name="Body" element="tns:NumberInfo" />
+  </wsdl:message>
+  <wsdl:portType name="NumberplanPublicSoap">
+    <wsdl:operation name="Query">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get country data from phone number. Minimum number length 3 digits</wsdl:documentation>
+      <wsdl:input message="tns:QuerySoapIn" />
+      <wsdl:output message="tns:QuerySoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="NumberplanPublicHttpGet">
+    <wsdl:operation name="Query">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get country data from phone number. Minimum number length 3 digits</wsdl:documentation>
+      <wsdl:input message="tns:QueryHttpGetIn" />
+      <wsdl:output message="tns:QueryHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="NumberplanPublicHttpPost">
+    <wsdl:operation name="Query">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get country data from phone number. Minimum number length 3 digits</wsdl:documentation>
+      <wsdl:input message="tns:QueryHttpPostIn" />
+      <wsdl:output message="tns:QueryHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NumberplanPublicSoap" type="tns:NumberplanPublicSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Query">
+      <soap:operation soapAction="intele.services/Query" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:QueryAuthorizer" part="Authorizer" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NumberplanPublicSoap12" type="tns:NumberplanPublicSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Query">
+      <soap12:operation soapAction="intele.services/Query" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:QueryAuthorizer" part="Authorizer" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NumberplanPublicHttpGet" type="tns:NumberplanPublicHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Query">
+      <http:operation location="/Query" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NumberplanPublicHttpPost" type="tns:NumberplanPublicHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Query">
+      <http:operation location="/Query" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NumberplanPublic">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">International numberingplan</wsdl:documentation>
+    <wsdl:port name="NumberplanPublicSoap" binding="tns:NumberplanPublicSoap">
+      <soap:address location="https://services.intelesms.no/numberplan/public.asmx" />
+    </wsdl:port>
+    <wsdl:port name="NumberplanPublicSoap12" binding="tns:NumberplanPublicSoap12">
+      <soap12:address location="https://services.intelesms.no/numberplan/public.asmx" />
+    </wsdl:port>
+    <wsdl:port name="NumberplanPublicHttpGet" binding="tns:NumberplanPublicHttpGet">
+      <http:address location="https://services.intelesms.no/numberplan/public.asmx" />
+    </wsdl:port>
+    <wsdl:port name="NumberplanPublicHttpPost" binding="tns:NumberplanPublicHttpPost">
+      <http:address location="https://services.intelesms.no/numberplan/public.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

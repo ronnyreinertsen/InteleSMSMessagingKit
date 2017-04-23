@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <!--*-->
+    <id>$id$</id>
+    <!--*-->
+    <version>1.0.0.1</version>
+    <title>Intele Sms Messaging Kit</title>
+    <!--*-->
+    <authors>Ronny Berglihn Reinertsen</authors>
+    <owners>$author$</owners>
+    <!--
+    <licenseUrl></licenseUrl>   
+    
+-->
+    <projectUrl>http://intele.no/NuGet/SmsMessagingKit</projectUrl>
+    <iconUrl>http://intele.no/favicon.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <!--*-->
+    <description>$description$</description>
+    <!--*-->
+    <releaseNotes>Misc&amp;#x0020;updates&amp;#x0020;to&amp;#x0020;documentation</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>mobile gsm billing gas cpa cellhpone gateway</tags>
+    <dependencies>
+   <group targetFramework="net462" />
+</dependencies>
+  </metadata>
+</package>
