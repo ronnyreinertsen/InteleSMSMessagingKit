@@ -128,7 +128,7 @@ namespace InteleSmsMessagingKit
         public string DestinationAddress { get; set; }
 
         /// <summary>
-        /// Destination address for the message
+        /// Destination number for the message. E.g 99700999, 1933. Same as DestinationAddress, but without country prefix and leading +
         /// </summary>
         public string DestinationNumber { get; set; }
 
