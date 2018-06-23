@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="intelesms.services" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="intelesms.services" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SMS gateway API - &lt;a href="https://kunde.intelesms.no/files/SMS_Gateway_Implementation_Guide.pdf"&gt;Click here for more info&lt;/a&gt;</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="intelesms.services">
+      <s:element name="SendSMS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="smsObj" type="tns:SMSMessage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SMSMessage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Gateway" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OriginatorAddress" nillable="true" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DestinationAddress" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MessageType" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValidationPeriode" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValidationPeriod" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MessageID" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserDataHeader" nillable="true" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserData" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Category" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CustomData" nillable="true" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryReportUrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ServiceCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ServiceDescription" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendSMSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendSMSResult" type="tns:ResponseObj" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResponseObj">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="StatusCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExtraInfo" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Authorizer" type="tns:Authorizer" />
+      <s:complexType name="Authorizer">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CustomerID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CustomData" nillable="true" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SendSMSSoapIn">
+    <wsdl:part name="parameters" element="tns:SendSMS" />
+  </wsdl:message>
+  <wsdl:message name="SendSMSSoapOut">
+    <wsdl:part name="parameters" element="tns:SendSMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendSMSAuthorizer">
+    <wsdl:part name="Authorizer" element="tns:Authorizer" />
+  </wsdl:message>
+  <wsdl:portType name="SMS_x0020_gatewaySoap">
+    <wsdl:operation name="SendSMS">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Send SMS message</wsdl:documentation>
+      <wsdl:input message="tns:SendSMSSoapIn" />
+      <wsdl:output message="tns:SendSMSSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SMS_x0020_gatewaySoap" type="tns:SMS_x0020_gatewaySoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendSMS">
+      <soap:operation soapAction="intelesms.services/SendSMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SendSMSAuthorizer" part="Authorizer" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SMS_x0020_gatewaySoap12" type="tns:SMS_x0020_gatewaySoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendSMS">
+      <soap12:operation soapAction="intelesms.services/SendSMS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SendSMSAuthorizer" part="Authorizer" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SMS_x0020_gateway">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SMS gateway API - &lt;a href="https://kunde.intelesms.no/files/SMS_Gateway_Implementation_Guide.pdf"&gt;Click here for more info&lt;/a&gt;</wsdl:documentation>
+    <wsdl:port name="SMS_x0020_gatewaySoap" binding="tns:SMS_x0020_gatewaySoap">
+      <soap:address location="http://smsgw.intele.no/pushsms/script.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SMS_x0020_gatewaySoap12" binding="tns:SMS_x0020_gatewaySoap12">
+      <soap12:address location="http://smsgw.intele.no/pushsms/script.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

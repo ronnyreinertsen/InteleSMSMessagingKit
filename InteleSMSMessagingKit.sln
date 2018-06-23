@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteleSMSMessagingKit", "src\InteleSMSMessagingKit.csproj", "{5C25F958-C72E-4E00-A693-52B03B1E85BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteleSmsMessagingKit", "src\InteleSmsMessagingKit.csproj", "{5C25F958-C72E-4E00-A693-52B03B1E85BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,5 +21,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {59B868D8-0E83-458D-83C1-5EBAE39EB2C2}
 	EndGlobalSection
 EndGlobal

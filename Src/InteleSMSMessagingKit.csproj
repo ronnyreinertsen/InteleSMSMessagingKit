@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>InteleSmsMessagingKit</RootNamespace>
     <AssemblyName>InteleSmsMessagingKit</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -51,13 +51,51 @@
     <DocumentationFile>InteleSmsMessagingKit.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ServiceStack.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Client.5.1.0\lib\net45\ServiceStack.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Interfaces.5.1.0\lib\net45\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Text.5.1.0\lib\net45\ServiceStack.Text.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\System.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -69,12 +107,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="HowTo.cs" />
-    <Compile Include="IncomingSmsMessage.cs" />
-    <Compile Include="NumberplanFactory.cs" />
-    <Compile Include="NrdbFactory.cs" />
+    <Compile Include="Service References\SmsSoapApi\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Sms\SmsRestClient.cs" />
+    <Compile Include="Samples\Examples.cs" />
+    <Compile Include="Sms\IncomingSmsMessage.cs" />
+    <Compile Include="Dto\InteleSmsRestApi.dtos.cs" />
+    <Compile Include="Numberingplan\NumberplanFactory.cs" />
+    <Compile Include="Nrdb\NrdbFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SendHttpResponse.cs" />
+    <Compile Include="Sms\SendHttpResponse.cs" />
     <Compile Include="Service References\NrdbService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -85,17 +130,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="SmsFactory.cs" />
-    <Compile Include="SmsHttpMessage.cs" />
-    <Compile Include="SmsMessageHttpClient.cs" />
+    <Compile Include="Sms\SmsFactory.cs" />
+    <Compile Include="Sms\SmsHttpMessage.cs" />
+    <Compile Include="Sms\SmsMessageHttpClient.cs" />
+    <Compile Include="Sms\SoapClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app.config">
+    <None Include="app.config">
       <SubType>Designer</SubType>
-    </Content>
+    </None>
+    <None Include="content\app.config.transform" />
+    <None Include="packages.config" />
+    <None Include="README.md" />
     <None Include="Service References\NumberplanService\InteleSmsMessagingKit.NumberplanService.QueryResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -104,9 +153,6 @@
       <DependentUpon>app.config</DependentUpon>
     </None>
     <None Include="app.Release.config">
-      <DependentUpon>app.config</DependentUpon>
-    </None>
-    <None Include="app.TestServer.config">
       <DependentUpon>app.config</DependentUpon>
     </None>
     <None Include="package.nuspec">
@@ -133,10 +179,33 @@
     <None Include="Service References\NrdbService\configuration91.svcinfo" />
     <None Include="Service References\NrdbService\script.disco" />
     <None Include="Service References\NrdbService\script.wsdl" />
+    <None Include="Service References\SmsSoapApi\InteleSmsMessagingKit.SmsSoapApi.ResponseObj.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SmsSoapApi\InteleSmsMessagingKit.SmsSoapApi.SendSMSResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SmsSoapApi\script.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\NrdbService\" />
     <WCFMetadataStorage Include="Service References\NumberplanService\" />
+    <WCFMetadataStorage Include="Service References\SmsSoapApi\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SmsSoapApi\script.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SmsSoapApi\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SmsSoapApi\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SmsSoapApi\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
