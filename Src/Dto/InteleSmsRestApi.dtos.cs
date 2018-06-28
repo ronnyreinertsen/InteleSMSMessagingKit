@@ -1,8 +1,8 @@
 /* Options:
-Date: 2018-06-20 13:23:29
+Date: 2018-06-29 01:37:52
 Version: 5.10
 Tip: To override a DTO option, remove "//" prefix before updating
-BaseUrl: https://smsgw.intele.no/pushsms/rest
+BaseUrl: https://smsgw.intele.no/dev-pushsms/rest
 
 //GlobalNamespace: 
 //MakePartial: True
@@ -30,25 +30,12 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using ServiceStack;
 using ServiceStack.DataAnnotations;
+using PushSmsLib.Dto;
 
 
-
-namespace InteleSmsMessagingKit.Dto
+namespace PushSmsLib.Dto
 {
-    /// <summary>
-    /// Global settings for REST api
-    /// </summary>
-    public static class RestApiGlobals
-    {
-        /// <summary>
-        /// Base uri to REST API
-        /// </summary>
-        public static string RestApiBaseUri = "https://smsgw.intelesms.no/dev-pushsms/rest";
-    }
 
-    /// <summary>
-    /// Single message object class
-    /// </summary>
     public partial class RestSmsMessageReq
     {
         public RestSmsMessageReq()
@@ -151,9 +138,6 @@ namespace InteleSmsMessagingKit.Dto
         public virtual string ServiceDescription { get; set; }
     }
 
-    /// <summary>
-    /// Response object per message
-    /// </summary>
     public partial class RestSmsMessageResp
     {
         public RestSmsMessageResp()
@@ -195,9 +179,6 @@ namespace InteleSmsMessagingKit.Dto
         public virtual Dictionary<string, string> ExtraInfo { get; set; }
     }
 
-    /// <summary>
-    /// Request object per server query
-    /// </summary>
     public partial class RestSmsRequest
         : IReturn<RestSmsResponse>
     {
@@ -227,9 +208,6 @@ namespace InteleSmsMessagingKit.Dto
         public virtual RestSmsMessageReq[] Messages { get; set; }
     }
 
-    /// <summary>
-    /// Response object per server query
-    /// </summary>
     public partial class RestSmsResponse
     {
         public RestSmsResponse()
@@ -244,9 +222,16 @@ namespace InteleSmsMessagingKit.Dto
         public virtual bool ProcessResult { get; set; }
 
         ///<summary>
+        ///Description of any error occured, if ProcessResult equals false
+        ///</summary>
+        [ApiMember(Description="Description of any error occured, if ProcessResult equals false", ParameterType="form")]
+        [StringLength(2048)]
+        public virtual string ProcessResultDescription { get; set; }
+
+        ///<summary>
         ///Collection of messages sent
         ///</summary>
-        [ApiMember(Description="Collection of messages sent", IsRequired=true, ParameterType="form")]
+        [ApiMember(Description="Collection of messages sent", ParameterType="form")]
         public virtual RestSmsMessageResp[] Messages { get; set; }
     }
 }
