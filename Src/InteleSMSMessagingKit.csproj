@@ -142,7 +142,6 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="content\app.config.transform" />
     <None Include="packages.config" />
     <None Include="README.md" />
     <None Include="Service References\NumberplanService\InteleSmsMessagingKit.NumberplanService.QueryResponse.datasource">
