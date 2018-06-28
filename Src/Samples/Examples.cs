@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using ServiceStack.Text;
+using PushSmsLib.Dto;
 
 namespace InteleSmsMessagingKit.Tests
 {
@@ -26,14 +27,14 @@ namespace InteleSmsMessagingKit.Tests
         public static void SendSmsMessageRestApi(int customerId, string password, long destinationAddress, string message)
         {
             //Create main request object
-            var restRequest = new Dto.RestSmsRequest();
+            var restRequest = new RestSmsRequest();
             restRequest.Username = customerId.ToString(); //Your Intele Customer Id
             restRequest.Password = password; //Your Intele Password
 
             //Create a message and store in temp list
-            var msgList = new List<Dto.RestSmsMessageReq>();
+            var msgList = new List<RestSmsMessageReq>();
 
-            var addMsg = new Dto.RestSmsMessageReq
+            var addMsg = new RestSmsMessageReq
             {
                 Category = "TEST-MESSAGES",
                 DeliveryReportUrl = string.Empty, //Set to your server uri to receive delivery reports to verify that the message is delivered

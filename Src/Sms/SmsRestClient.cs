@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PushSmsLib.Dto;
 
 namespace InteleSmsMessagingKit.Sms
 {
@@ -19,7 +20,7 @@ namespace InteleSmsMessagingKit.Sms
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public static Dto.RestSmsResponse ExecuteRestApiCall(Dto.RestSmsRequest request)
+        public static RestSmsResponse ExecuteRestApiCall(RestSmsRequest request)
         {
 
             //Create client for accessing REST Api

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using InteleSmsMessagingKit.Sms;
+using PushSmsLib.Dto;
 
 namespace InteleSmsMessagingKit
 {
@@ -19,7 +20,7 @@ namespace InteleSmsMessagingKit
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        public static Dto.RestSmsResponse SendSms(Dto.RestSmsRequest message)
+        public static RestSmsResponse SendSms(RestSmsRequest message)
         {
 
             //Check if we need to read from app.config
