@@ -1,8 +1,8 @@
 /* Options:
-Date: 2018-06-29 01:37:52
+Date: 2018-06-29 01:52:53
 Version: 5.10
 Tip: To override a DTO option, remove "//" prefix before updating
-BaseUrl: https://smsgw.intele.no/dev-pushsms/rest
+BaseUrl: https://smsgw.intele.no/pushsms/rest
 
 //GlobalNamespace: 
 //MakePartial: True
