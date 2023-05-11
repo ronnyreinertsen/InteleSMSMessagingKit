@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
-using ServiceStack.Text;
 using PushSmsLib.Dto;
+using Newtonsoft.Json;
 
 namespace InteleSmsMessagingKit.Tests
 {
@@ -14,22 +14,31 @@ namespace InteleSmsMessagingKit.Tests
 	/// Class for doing some tests
 	/// </summary>
 
-	public static class Examples
+	public static class RequestExamples
 	{
+
+		static void Main(string[] args)
+		{
+			long mobilenumber = 0;
+			//RequestExamples.SendSmsMessageSoap(mobilenumber, "Test 1");
+			//RequestExamples.SendSmsMessage(mobilenumber, "Test 2");
+			//RequestExamples.SendSmsMessageRestApi(mobilenumber, "Test 3");
+			//RequestExamples.NumberplanQuery(mobilenumber);			
+			//RequestExamples.NrdbQuery(mobilenumber);
+			Console.ReadKey();
+		}
 
 		/// <summary>
 		/// Simple Send message test using REST API
 		/// </summary>
-		/// <param name="customerId"></param>
-		/// <param name="password"></param>
 		/// <param name="destinationAddress"></param>
 		/// <param name="message"></param>
-		public static void SendSmsMessageRestApi(int customerId, string password, long destinationAddress, string message)
+		public static void SendSmsMessageRestApi(long destinationAddress, string message)
 		{
 			//Create main request object
 			var restRequest = new RestSmsRequest();
-			restRequest.Username = customerId.ToString(); //Your Intele Customer Id
-			restRequest.Password = password; //Your Intele Password
+			restRequest.Username = ConfigurationManager.AppSettings["InteleApiCustomerId"]; //Your Intele Customer Id
+			restRequest.Password = ConfigurationManager.AppSettings["InteleApiPassword"]; //Your Intele Password
 
 			//Create a message and store in temp list
 			var msgList = new List<RestSmsMessageReq>();
@@ -79,7 +88,7 @@ namespace InteleSmsMessagingKit.Tests
 
 			// TODO:
 			//Just print output to console. You should handle each message and it's status and returned parameters here.
-			Console.WriteLine(JsonSerializer.SerializeToString(response));
+			Console.WriteLine(JsonConvert.SerializeObject(response));
 
 
 		}
@@ -88,13 +97,13 @@ namespace InteleSmsMessagingKit.Tests
 		/// <summary>
 		/// Send simple test message using HTTP GET API
 		/// </summary>
-		/// <param name="customerId"></param>
-		/// <param name="password"></param>
 		/// <param name="destinationAddress"></param>
 		/// <param name="message"></param>
-		public static void SendSmsMessage(int customerId, string password, long destinationAddress, string message)
+		public static void SendSmsMessage(long destinationAddress, string message)
 		{
-
+			int customerId = Int32.Parse(ConfigurationManager.AppSettings["InteleApiCustomerId"]); //Your Intele Customer Id
+			string password = ConfigurationManager.AppSettings["InteleApiPassword"]; //Your Intele Password
+			
 			//Send 1.
 			var result1 = SmsFactory.SendSms(new SmsHttpMessage
 			{
@@ -114,7 +123,7 @@ namespace InteleSmsMessagingKit.Tests
 
 			// TODO:
 			//Just print output to console. You should handle each message and it's status and returned parameters here.
-			Console.WriteLine(JsonSerializer.SerializeToString(result1));
+			Console.WriteLine(JsonConvert.SerializeObject(result1));
 
 			//Print result:
 			if (result1.Success)
@@ -131,14 +140,13 @@ namespace InteleSmsMessagingKit.Tests
 		/// <summary>
 		/// Send Sms message using SOAP API
 		/// </summary>
-		/// <param name="customerId"></param>
-		/// <param name="password"></param>
 		/// <param name="destinationAddress"></param>
 		/// <param name="message"></param>
-		public static void SendSmsMessageSoap(int customerId, string password, long destinationAddress, string message)
+		public static void SendSmsMessageSoap(long destinationAddress, string message)
 		{
-
-			//Send 1.
+			int customerId = Int32.Parse(ConfigurationManager.AppSettings["InteleApiCustomerId"]); //Your Intele Customer Id
+			string password = ConfigurationManager.AppSettings["InteleApiPassword"]; //Your Intele Password
+																											 //Send 1.
 			var result1 = SmsFactory.SendSms(new SmsSoapApi.SendSMSRequest
 			{
 				Authorizer = new SmsSoapApi.Authorizer { CustomerID = customerId, Password = password },
@@ -164,7 +172,7 @@ namespace InteleSmsMessagingKit.Tests
 
 			// TODO:
 			//Just print output to console. You should handle each message and it's status and returned parameters here.
-			Console.WriteLine(JsonSerializer.SerializeToString(result1));
+			Console.WriteLine(JsonConvert.SerializeObject(result1));
 
 			//Print result:
 			if (result1.StatusCode == 0)
@@ -188,7 +196,7 @@ namespace InteleSmsMessagingKit.Tests
 			var result = NumberplanFactory.CheckNumberplan(mobileNumber);
 
 			//Print result
-			Console.WriteLine(JsonSerializer.SerializeToString(result));
+			Console.WriteLine(JsonConvert.SerializeObject(result));
 		}
 
 		/// <summary>
@@ -208,7 +216,7 @@ namespace InteleSmsMessagingKit.Tests
 			var result = NrdbFactory.CheckNrdb(mobileNumber);
 
 			//Print result
-			Console.WriteLine(JsonSerializer.SerializeToString(result));
+			Console.WriteLine(JsonConvert.SerializeObject(result));
 
 		}
 

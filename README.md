@@ -14,3 +14,4 @@ Changes:
 21.10.2019 - Upgraded project to .NET Framework 4.8
 22.10.2019 - Bug fix on CustomData variable result in null exception if not set using REST API
 16.11.2022 - Upgraded project to .NET Framework 4.8.1 and upgraded referenced libs
+16.11.2022 - Downgrade project to .NET Framework 4.8 and removed ServiceStack dependencies

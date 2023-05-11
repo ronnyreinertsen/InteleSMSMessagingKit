@@ -21,7 +21,7 @@ namespace InteleSmsMessagingKit
         /// <returns></returns>
 		public static NrdbService.NrdbStatus CheckNrdb(long phoneNumber)
         {
-            var client = new NrdbService.NrdbLookupServiceSoapClient("Nrdb Lookup ServiceSoap12");
+            var client = new NrdbService.NrdbLookupServiceSoapClient();
 
             var auth = new NrdbService.LoginClass
             {

@@ -24,7 +24,7 @@ namespace InteleSmsMessagingKit.NrdbService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -70,7 +70,7 @@ namespace InteleSmsMessagingKit.NrdbService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -228,46 +228,29 @@ namespace InteleSmsMessagingKit.NrdbService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.9037.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="intelesms.services")]
-    public enum ErrorCodeEnum {
-        
-        /// <remarks/>
-        ClientSystemError,
-        
-        /// <remarks/>
-        ClientInvalidLogin,
-        
-        /// <remarks/>
-        ClientMaxQueryReached,
-        
-        /// <remarks/>
-        ClientInvalidMsisdn,
-        
-        /// <remarks/>
-        ClientInetFailure,
-        
-        /// <remarks/>
-        Success,
-        
-        /// <remarks/>
-        RemoteInvalidMsisdn,
-        
-        /// <remarks/>
-        RemoteNonExistingNumber,
-        
-        /// <remarks/>
-        RemoteSystemError,
-        
-        /// <remarks/>
-        RemoteMaxQueryReached,
-        
-        /// <remarks/>
-        RemoteInvalidLogin,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+	public enum ErrorCodeEnum : int
+	{
+
+		ClientSystemError = -5,
+		ClientInvalidLogin = -4,
+		ClientMaxQueryReached = -3,
+		ClientInvalidMsisdn = -2,
+		ClientInetFailure = -1,
+
+		Success = 0,
+
+		RemoteInvalidMsisdn = 1,
+		RemoteNonExistingNumber = 2,
+		RemoteSystemError = 3,
+		RemoteMaxQueryReached = 4,
+		RemoteInvalidLogin = 5
+
+	}
+
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface NrdbLookupServiceSoapChannel : InteleSmsMessagingKit.NrdbService.NrdbLookupServiceSoap, System.ServiceModel.IClientChannel {
     }
     

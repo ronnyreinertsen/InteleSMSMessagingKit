@@ -20,8 +20,7 @@ namespace InteleSmsMessagingKit
         /// <returns></returns>
         public static NumberplanService.NumberInfo CheckNumberplan(long phoneNumber)
         {
-            var client = new NumberplanService.NumberplanPublicSoapClient("NumberplanPublicSoap12");
-
+            var client = new NumberplanService.NumberplanPublicSoapClient();
             var auth = new NumberplanService.Authorizer {
                 ApiCustomerId = int.Parse(ConfigurationManager.AppSettings["InteleApiCustomerId"]),
                 ApiPassword = ConfigurationManager.AppSettings["InteleApiPassword"]
