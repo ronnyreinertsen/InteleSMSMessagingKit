@@ -60,9 +60,6 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Client, Version=6.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
-      <HintPath>..\packages\ServiceStack.Client.6.4.0\lib\net472\ServiceStack.Client.dll</HintPath>
-    </Reference>
     <Reference Include="System">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\System.dll</HintPath>
     </Reference>
@@ -138,6 +135,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Sms\SmsRestClient.cs" />
+    <Content Include="favicon.ico" />
     <Content Include="Intele.Examples\Request.Examples.cs" />
     <Compile Include="Sms\IncomingSmsMessage.cs" />
     <Compile Include="Dto\InteleSmsRestApi.dtos.cs" />
@@ -159,18 +157,17 @@
     <Compile Include="Sms\SmsHttpMessage.cs" />
     <Compile Include="Sms\SmsMessageHttpClient.cs" />
     <Compile Include="Sms\SoapClient.cs" />
+    <Content Include="logo.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\README.md">
-      <Link>README.md</Link>
-    </None>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="README.md" />
     <None Include="Service References\NumberplanService\InteleSmsMessagingKit.NumberplanService.QueryResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
